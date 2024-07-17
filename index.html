@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esmeralda Tarô Cigano</title>
+    <meta name="description" content="Realize um sorteio de cartas do Tarô Cigano e descubra as mensagens e significados ocultos por trás de cada carta.">
+    <meta name="keywords" content="tarô cigano, sorteio de cartas, cartomancia, esoterismo, significado das cartas">
+    <meta name="author" content="Julio Campos Machado (@radiotatuapefm)">
+    <link rel="stylesheet" type="text/css" href="css/app.css">
+  </head>
+
+<video autoplay muted loop id="background-video">
+  <source src="taro.mp4" type="video/mp4">
+  Seu navegador não suporta o elemento de vídeo.
+</video>
+
+  
+<body>
+<h2>Esmeralda Tarô Cigano</h2>
+  <div class="container">
+        <div class="cards shuffle">
+        <div class="card">
+            <h2>Passado</h2>
+            <img id="imagemCarta1" src="img/capa.jpg" alt="Imagem da Carta 1">
+            <p id="carta1"></p>
+            <p id="significado1"></p>
+          </div>
+          
+          <div class="card">
+            <h2>Presente</h2>
+            <img id="imagemCarta2" src="img/capa.jpg" alt="Imagem da Carta 2">
+            <p id="carta2"></p>
+            <p id="significado2"></p>
+          </div>
+          
+          <div class="card">
+            <h2>Futuro</h2>
+            <img id="imagemCarta3" src="img/capa.jpg" alt="Imagem da Carta 3">
+            <p id="carta3"></p>
+            <p id="significado3"></p>
+          </div>
+          
+    </div>
+
+    <button id="sortearBtn">Mentalize a sua pergunta e clique aqui</button>
+  </div>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
