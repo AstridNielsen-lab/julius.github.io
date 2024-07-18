@@ -1,51 +1,172 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Esmeralda Tarô Cigano</title>
-    <meta name="description" content="Realize um sorteio de cartas do Tarô Cigano e descubra as mensagens e significados ocultos por trás de cada carta.">
-    <meta name="keywords" content="tarô cigano, sorteio de cartas, cartomancia, esoterismo, significado das cartas">
-    <meta name="author" content="Julio Campos Machado (@radiotatuapefm)">
-    <link rel="stylesheet" type="text/css" href="css/app.css">
-  </head>
-
-<video autoplay muted loop id="background-video">
-  <source src="taro.mp4" type="video/mp4">
-  Seu navegador não suporta o elemento de vídeo.
-</video>
-
-  
+    <title>Animação de Cartas com GSAP</title>
+    <style>
+        body {
+            background-color: black; /* Fundo preto */
+            color: white; /* Cor do texto */
+            text-align: center; /* Centraliza o conteúdo */
+        }
+        .container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 50px;
+        }
+        .pile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            width: 300px;
+            height: 479px;
+        }
+        .card, .cover {
+            width: 300px;
+            height: 479px;
+            margin: 0px;
+            position: absolute;
+            transition: transform 0.3s ease;
+        }
+        .cover {
+            z-index: 1; /* Ensure cover is on top */
+        }
+        .button-container {
+            margin: 40px 0;
+        }
+        .button-container button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 0 10px; /* Espaçamento entre botões */
+        }
+    </style>
+</head>
 <body>
-<h2>Esmeralda Tarô Cigano</h2>
-  <div class="container">
-        <div class="cards shuffle">
-        <div class="card">
-            <h2>Passado</h2>
-            <img id="imagemCarta1" src="img/capa.jpg" alt="Imagem da Carta 1">
-            <p id="carta1"></p>
-            <p id="significado1"></p>
-          </div>
-          
-          <div class="card">
-            <h2>Presente</h2>
-            <img id="imagemCarta2" src="img/capa.jpg" alt="Imagem da Carta 2">
-            <p id="carta2"></p>
-            <p id="significado2"></p>
-          </div>
-          
-          <div class="card">
-            <h2>Futuro</h2>
-            <img id="imagemCarta3" src="img/capa.jpg" alt="Imagem da Carta 3">
-            <p id="carta3"></p>
-            <p id="significado3"></p>
-          </div>
-          
-    </div>
 
-    <button id="sortearBtn">Mentalize a sua pergunta e clique aqui</button>
-  </div>
-  <script src="js/app.js"></script>
+
+<div class="container">
+    <div class="pile" id="pile1">
+        <img class="cover" src="capa.gif" alt="Capa">
+    </div>
+    <div class="pile" id="pile2">
+        <img class="cover" src="capa.gif" alt="Capa">
+    </div>
+    <div class="pile" id="pile3">
+        <img class="cover" src="capa.gif" alt="Capa">
+    </div>
+</div>
+
+<div class="button-container">
+    <button id="sortearBtn">Sortear Cartas</button>
+    <button onclick="shuffleCards()">Embaralhar</button>
+</div>
+
+<!-- Incluindo GSAP via CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+<script>
+    const cardFiles = [
+        "ALIANÇA.jpg", "ÂNCORA.jpg", "ÁRVORE.jpg", "BUQUÊ.jpg",
+        "CACHORRO.jpg", "CAIXÃO.jpg", "CAMINHOS.jpg", "CARTA.jpg",
+        "CASA.jpg", "CAVALEIRO.jpg", "CEGONHA.jpg", "CHAVE.jpg",
+        "CHICOTE.jpg", "CIGANA.jpg", "CIGANO.jpg", "COBRA.jpg",
+        "CORAÇÃO.jpg", "CRIANÇA.jpg", "CRUZ.jpg", "ESTRELAS.jpg",
+        "FOICE.jpg", "JARDIM.jpg", "LÍRIOS.jpg", "LIVROS.jpg",
+        "LUA.jpg", "MONTANHA.jpg", "NAVIO.jpg", "NUVENS.jpg",
+        "PÁSSAROS.jpg", "PEIXES.jpg", "RAPOSA.jpg", "RATOS.jpg",
+        "SOL.jpg", "TORRE.jpg", "TREVO.jpg", "URSO.jpg"
+    ];
+
+    function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    function initializeCards() {
+        const piles = [document.getElementById('pile1'), document.getElementById('pile2'), document.getElementById('pile3')];
+
+        piles.forEach(pile => {
+            pile.innerHTML = "";
+            const cover = document.createElement('img');
+            cover.className = 'cover';
+            cover.src = "capa.gif";
+            pile.appendChild(cover);
+        });
+
+        const shuffledCards = shuffle(cardFiles);
+        shuffledCards.forEach((cardFile, index) => {
+            const pileIndex = index % piles.length;
+            const cardElement = document.createElement('img');
+            cardElement.className = 'card';
+            cardElement.src = `img/cartas/${cardFile}`;
+            piles[pileIndex].appendChild(cardElement);
+        });
+    }
+
+    initializeCards();
+
+    function shuffleCards() {
+        const piles = [document.getElementById('pile1'), document.getElementById('pile2'), document.getElementById('pile3')];
+
+        // Remove a capa antes de embaralhar
+        piles.forEach(pile => {
+            const cover = pile.querySelector('.cover');
+            gsap.to(cover, {
+                duration: 0.5,
+                opacity: 0,
+                onComplete: () => {
+                    cover.style.display = 'none'; // Esconde a capa
+                }
+            });
+        });
+
+        const cardsInPile1 = Array.from(piles[0].children).slice(1); // Ignorar a capa
+        const cardsInPile3 = Array.from(piles[2].children).slice(1); // Ignorar a capa
+
+        // Movendo cartas de pile1 para pile3
+        cardsInPile1.forEach((card, index) => {
+            setTimeout(() => {
+                gsap.to(card, {
+                    duration: 0.5,
+                    x: piles[2].getBoundingClientRect().left - piles[0].getBoundingClientRect().left,
+                    y: index * 20,
+                    onComplete: () => {
+                        piles[2].appendChild(card);
+                        card.style.transform = 'none';
+                    }
+                });
+            }, index * 100);
+        });
+
+        // Movendo cartas de pile3 para pile2
+        cardsInPile3.forEach((card, index) => {
+            setTimeout(() => {
+                gsap.to(card, {
+                    duration: 0.5,
+                    x: piles[1].getBoundingClientRect().left - piles[2].getBoundingClientRect().left,
+                    y: index * 20,
+                    onComplete: () => {
+                        piles[1].appendChild(card);
+                        card.style.transform = 'none';
+                    }
+                });
+            }, index * 100);
+        });
+
+        // Reinitialize cards after animation
+        setTimeout(initializeCards, Math.max(cardsInPile1.length, cardsInPile3.length) * 100 + 500);
+    }
+
+    document.getElementById('sortearBtn').addEventListener('click', function() {
+        window.location.href = 'mesa.html';
+    });
+</script>
+<script src="js/app.js"></script>
 
 </body>
 </html>
