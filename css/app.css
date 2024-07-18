@@ -58,16 +58,37 @@ h1 {
   color: #d4d4d4;
 }
 
-#sortearBtn {
-  display: block;
-  margin: 3px auto;
-  background-color: #6a8dcf;
-  color: #fff;
-  border: 10px;
+.button {
+  background-color: #17c4f0; /* Verde */
+  border: none;
+  color: white;
   padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
   font-size: 20px;
-  border-radius: 5px;
+  margin: 4px 2px;
   cursor: pointer;
+  border-radius: 5px;
+}
+
+.button:hover {
+  background-color: #6a8dcf; /* Verde escuro */
+}
+
+
+#sortearBtn {
+  background-color: #17c4f0; /* Verde */
+  border: none;
+  color: white;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
   transition: background-color 0.3s ease-in-out;
 }
 
