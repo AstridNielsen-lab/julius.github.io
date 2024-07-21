@@ -1,65 +1,205 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-  <meta name="google-adsense-account" content="ca-pub-8253421262019645">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8253421262019645"
-    crossorigin="anonymous"></script>
-  <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/188/188802.png">
-  <title>Juliu´s Tarô Cigano</title>
-  <meta name="description" content="Juliu´s Tarô Cigano e descubra as mensagens e significados ocultos por trás de cada carta.">
-  <meta name="keywords" content="tarô cigano, sorteio de cartas, cartomancia, esoterismo, significado das cartas">
-  <meta name="author" content="Julio Campos Machado (@radiotatuapefm)">
-  <link rel="stylesheet" type="text/css" href="css/app.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-8253421262019645">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8253421262019645" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/188/188802.png">
+    <title>Juliu's Tarô Cigano</title>
+    <meta name="description" content="Juliu's Tarô Cigano e descubra as mensagens e significados ocultos por trás de cada carta.">
+    <meta name="keywords" content="tarô cigano, sorteio de cartas, cartomancia, esoterismo, significado das cartas">
+    <meta name="author" content="Julio Campos Machado (@radiotatuapefm)">
+    <link rel="stylesheet" type="text/css" href="css/app.css">
+    <style>
+        body {
+            background-color: black; /* Fundo escuro */
+            color: #e0e0e0; /* Texto claro */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Alinha o conteúdo no centro horizontalmente */
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px; /* Define uma largura máxima para a container */
+            padding: 20px;
+            box-sizing: border-box; /* Inclui o padding e border no cálculo da largura total */
+        }
+        .cards {
+            display: flex;
+            flex-wrap: wrap; /* Permite que os cards quebrem a linha se não houver espaço suficiente */
+            justify-content: space-around; /* Espaça os cards igualmente */
+            margin-bottom: 20px; /* Espaçamento inferior dos cards */
+        }
+        .card {
+            background-color: #000000; /* Fundo da carta */
+            border-radius: 10px; /* Bordas arredondadas */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra para destacar */
+            color: #e0e0e0; /* Texto claro */
+            padding: 10px;
+            text-align: center;
+            max-width: 300px; /* Largura máxima dos cards */
+            margin: 10px; /* Espaçamento lateral dos cards */
+            flex: 1; /* Faz com que os cards se ajustem ao espaço disponível */
+            box-sizing: border-box; /* Inclui padding e border no cálculo da largura total */
+        }
+        .card img {
+            width: 100%; /* Ajusta a imagem ao tamanho do card */
+            border-radius: 5px; /* Bordas arredondadas para a imagem */
+        }
+        .card h2 {
+            margin: 5px 0; /* Reduz o espaço superior e inferior do título */
+        }
+        .card p {
+            margin: 2px 0; /* Reduz o espaço superior e inferior dos textos */
+        }
+        .button, .button-link {
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #14baec;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none; /* Remove o sublinhado dos links */
+            font-family: Arial, sans-serif; /* Fonte igual aos outros botões */
+            font-size: 16px; /* Tamanho da fonte igual aos outros botões */
+            text-align: center; /* Centraliza o texto */
+            transition: background-color 0.3s ease; /* Transição suave */
+        }
+        .button:hover, .button-link:hover {
+            background-color: #3cc7f1;
+        }
+        .button-container {
+            display: flex;
+            flex-wrap: wrap; /* Permite que os botões quebrem a linha se não houver espaço suficiente */
+            justify-content: center; /* Centraliza os botões horizontalmente */
+            gap: 10px; /* Espaçamento entre os botões */
+            margin: 20px 0; /* Espaçamento superior e inferior */
+        }
+        .card-description-container {
+            text-align: center;
+            max-width: 800px; /* Limita a largura do texto */
+            margin: 20px auto; /* Centraliza e adiciona margens laterais */
+            padding: 20px;
+            background-color: #333; /* Fundo da caixa de texto */
+            border-radius: 10px; /* Bordas arredondadas */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra para destacar */
+            color: #e0e0e0; /* Texto claro */
+        }
+        .card-description-container h3 {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin: 0;
+        }
+        .card-description-container strong {
+            color: #ffcc00; /* Cor para destacar os títulos */
+        }
+        .payment-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .footer-links {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .footer-links h3, .footer-links h4 {
+            margin: 10px 0;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .cards {
+                flex-direction: column; /* Coloca os cards em uma coluna em vez de linha */
+                align-items: center; /* Centraliza os cards horizontalmente */
+            }
+            .button-container {
+                flex-direction: column; /* Coloca os botões em uma coluna em vez de linha */
+            }
+        }
+        @media (max-width: 480px) {
+            .button, .button-link {
+                font-size: 14px; /* Reduz o tamanho da fonte dos botões em telas menores */
+                padding: 8px 16px; /* Ajusta o padding dos botões */
+            }
+            .card {
+                max-width: 100%; /* Ajusta a largura máxima dos cards para 100% em telas menores */
+            }
+        }
+    </style>
 </head>
-<script src="script.js"></script>
-
 <body>
-  <div class="container">
-    <div class="cards shuffle">
-      <div class="card">
-        <h2>Passado</h2>
-        <img id="imagemCarta1" src="img/capa.gif" alt="Imagem da Carta 1">
-        <p id="carta1"></p>
-        <p id="significado1"></p>
-      </div>
-      
-      <div class="card">
-        <h2>Presente</h2>
-        <img id="imagemCarta2" src="img/capa.gif" alt="Imagem da Carta 2">
-        <p id="carta2"></p>
-        <p id="significado2"></p>
-      </div>
-      
-      <div class="card">
-        <h2>Futuro</h2>
-        <img id="imagemCarta3" src="img/capa.gif" alt="Imagem da Carta 3">
-        <p id="carta3"></p>
-        <p id="significado3"></p>
-      </div>
-    </div>                      
+    <div class="container">
+        <div class="cards shuffle">
+            <div class="card">
+                <img id="imagemCarta1" src="img/capa.gif" alt="Imagem da Carta 1">
+                <h2>Passado</h2>
+                <p id="carta1"></p>
+                <p id="significado1"></p>
+            </div>
+            
+            <div class="card">
+                <img id="imagemCarta2" src="img/capa.gif" alt="Imagem da Carta 2">
+                <h2>Presente</h2>
+                <p id="carta2"></p>
+                <p id="significado2"></p>
+            </div>
+            
+            <div class="card">
+                <img id="imagemCarta3" src="img/capa.gif" alt="Imagem da Carta 3">
+                <h2>Futuro</h2>
+                <p id="carta3"></p>
+                <p id="significado3"></p>
+            </div>
+        </div>
 
-   
-    <center>
-      <button class="button" id="sortearBtn">Mentalize</button>
-      <button class="button" onclick="window.location.href='index.html'">Embaralhar</button>
-    </center>
+        <div class="button-container">
+            <button class="button"onclick="window.location.href='index.html'">Embaralhar</button>
+            <button class="button" onclick="playAudio()">Dicas de Consulta</button>
+            <button class="button" id="sortearBtn" onclick="abrirCartas()">Abrir Cartas</button>
+            <a class="button-link" href="https://mpago.la/2wdeTaR" target="_blank">Pagar</a> <!-- Novo botão -->
+        </div>
 
-    <center>
-      <h3>1- A primeira carta mostra o passado com relação a pergunta que você fez<br />
-      2- A segunda carta está ligada com o presente da questão pedida ao baralho<br />
-      3- Por fim, a terceira carta se liga ao futuro com relação ao que foi pedido.</h3>
-    </center>
-  </div>
+        <div class="card-description-container">
+            <h3>
+                <strong>Passado:</strong> A primeira carta revela aspectos importantes sobre o passado relacionados à pergunta que você fez. Ela oferece insights sobre experiências anteriores e eventos que moldaram a situação atual.<br /><br />
+                <strong>Presente:</strong> A segunda carta está conectada ao momento presente, fornecendo uma visão clara sobre o estado atual da questão que você trouxe ao baralho. Ela reflete a situação atual e as influências que estão em jogo no momento.<br /><br />
+                <strong>Futuro:</strong> A terceira carta oferece uma visão do futuro, mostrando possíveis desdobramentos e resultados com base na situação atual e nas forças em ação. Ela ajuda a entender como os eventos podem se desenrolar e quais são as perspectivas futuras.
+            </h3>
+        </div>
 
-  <center>
-    <h3><a href="https://likelook.wixsite.com/solutions">© Like Look Solutions All rights reserved.</a></h3>
-  </center>
+           <div class="button-container">
+            <a class="button-link" href="https://github.com/AstridNielsen-lab">GitHub</a>
+            <a class="button-link" href="https://api.whatsapp.com/send?phone=5511992946628&text=Oi%20Julio%20Tudo%20bem%20?%20preciso%20de%20Informa%C3%A7%C3%B5es%20sobre%20Tar%C3%B5%20estou%20no%20site%20:%20https://julius-github-io.vercel.app/index.html%20,%20pode%20me%20ajudar%20?">Contato</a>
+            <a class="button-link" href="https://api.whatsapp.com/send?phone=5519982785501&text=Pedro%20,%20tudo%20bem%20?%20Preciso%20Tirar%20minhas%20cartas%20estou%20no%20site%20:%20https://julius-github-io.vercel.app/index.html%20,%20qual%20o%20valor%20da%20consulta%20?%20" target="_blank">Consulta</a>
+        </div>
+        
+        <div class="payment-container">
+            <h3>Você pode pagar sua consulta clicando <a href="https://mpago.la/2wdeTaR" target="_blank">aqui</a>.</h3>
+        </div>
 
-  <script src="js/app.js"></script>
-  <center>
-    <script src="https://www.mercadopago.com.br/integrations/v1/web-payment-checkout.js"
-    data-preference-id="29008060-670504d9-121c-4748-854d-f9207c3ca9ba" data-source="button">
-    </script>
-  </center>
+        <div class="footer-links">
+            <h3>Desenvolvido por Julio Campos Machado</h3>
+            
+        </div>
+    </div>
+
+<audio id="audioPlayer" src="consulta.mp3" preload="auto"></audio>
+
+    <script>
+        function playAudio() {
+            var audio = document.getElementById('audioPlayer');
+            audio.play();
+        }
+
+ </script>
+
+
+
+
+    <script src="js/app.js"></script>
 </body>
 </html>

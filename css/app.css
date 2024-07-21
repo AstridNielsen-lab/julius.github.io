@@ -73,7 +73,7 @@ h1 {
 }
 
 .button:hover {
-  background-color: #6a8dcf; /* Verde escuro */
+  background-color: #7acee7; /* Verde escuro */
 }
 
 
@@ -85,15 +85,15 @@ h1 {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 20px;
-  margin: 4px 2px;
+  font-size: 16px;
+  margin: 10px 2px;
   cursor: pointer;
   border-radius: 5px;
   transition: background-color 0.3s ease-in-out;
 }
 
 #sortearBtn:hover {
-  background-color: #4e7ac1;
+  background-color: #00a030;
 }
 
 .cards.shuffle {

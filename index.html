@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-adsense-account" content="ca-pub-8253421262019645">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8253421262019645"
-     crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8253421262019645" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/188/188802.png">
     <title>Juliu´s Tarô Cigano</title>
     <meta name="description" content="Juliu´s Tarô Cigano e descubra as mensagens e significados ocultos por trás de cada carta.">
@@ -16,11 +15,14 @@
             background-color: black; /* Fundo preto */
             color: white; /* Cor do texto */
             text-align: center; /* Centraliza o conteúdo */
+            margin: 0;
+            font-family: Arial, sans-serif; /* Fonte mais legível */
         }
         .container {
             display: flex;
             justify-content: space-around;
             margin-top: 50px;
+            flex-wrap: wrap; /* Permite que os elementos quebrem linha em telas menores */
         }
         .pile {
             display: flex;
@@ -29,6 +31,7 @@
             position: relative;
             width: 300px;
             height: 479px;
+            margin: 10px; /* Adiciona margem entre pilhas */
         }
         .card, .cover {
             width: 300px;
@@ -38,44 +41,151 @@
             transition: transform 0.3s ease;
         }
         .cover {
-            z-index: 1; /* Ensure cover is on top */
+            z-index: 2; /* A capa deve estar acima das cartas */
         }
         .button-container {
             margin: 40px 0;
         }
-        .button-container button {
-            background-color: #17c4f0; /* Verde */
+        .button-container button, .footer-links a {
+            background-color: #17c4f0; /* Cor do botão */
             border: none;
             color: white;
-            padding: 10px 10px;
+            padding: 10px 20px; /* Aumentar o padding para melhor aparência */
             text-align: center;
             text-decoration: none;
             display: inline-block;
             font-size: 20px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 5px;Espaçamento entre botões */
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px; /* Bordas arredondadas */
+            transition: background-color 0.3s ease; /* Suaviza a transição de cor */
         }
+        .button-container button:hover, .footer-links a:hover {
+            background-color: #14a0d2; /* Cor ao passar o mouse */
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 10px; /* Espaçamento entre os links */
+            margin: 30px 0;
+        }
+        .footer-links a {
+            color: white; /* Cor dos links */
+            text-decoration: none; /* Remove o sublinhado dos links */
+            font-size: 20px;
+        }
+        .footer-links a:hover {
+            text-decoration: underline; /* Adiciona sublinhado ao passar o mouse */
+        }
+
+        /* Media Queries para telas menores */
+        @media (max-width: 768px) {
+            .pile {
+                width: 200px;
+                height: 319px;
+                margin: 5px;
+            }
+            .card, .cover {
+                width: 200px;
+                height: 319px;
+            }
+            .button-container button {
+                font-size: 16px;
+                padding: 8px 16px;
+            }
+            .footer-links a {
+                font-size: 16px;
+            }
+        }
+
+
+   /* Estilo para o chat */
+   .chat-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #222;
+            border-radius: 10px;
+            text-align: left;
+        }
+        .chat-container .header-container {
+            display: flex;
+            align-items: center;
+        }
+        .chat-container .header-container .logo {
+            width: 50px;
+            margin-right: 10px;
+        }
+        .chat-container .header-container .title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .chat-container #chat-history {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+        .chat-container .message {
+            margin: 10px 0;
+        }
+        .chat-container .user-message {
+            text-align: right;
+        }
+        .chat-container .bot-message {
+            text-align: left;
+        }
+        .chat-container .form-group {
+            display: flex;
+        }
+        .chat-container .form-group input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #555;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .chat-container .form-group button {
+            padding: 10px;
+            background-color: #17c4f0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .chat-container .form-group button:hover {
+            background-color: #14a0d2;
+        }
+
+
+
     </style>
 </head>
 <body>
 
+<audio id="backgroundMusic" src="fundo.mp3" loop></audio>
+<audio id="shuffleSound" src="shuffle.mp3"></audio>
 
 <div class="container">
-    <div class="pile" id="pile1">
-        <img class="cover" src="capa.gif" alt="Capa">
-    </div>
-    <div class="pile" id="pile2">
-        <img class="cover" src="capa.gif" alt="Capa">
-    </div>
-    <div class="pile" id="pile3">
-        <img class="cover" src="capa.gif" alt="Capa">
-    </div>
+    <div class="pile" id="pile1"></div>
+    <div class="pile" id="pile2"></div>
+    <div class="pile" id="pile3"></div>
 </div>
 
 <div class="button-container">
-    <button id="sortearBtn">Sortear Cartas</button>
     <button onclick="shuffleCards()">Embaralhar</button>
+    <button onclick="toggleAudio()">Play/Pause Música</button>
+    <button id="consultarBtn" onclick="window.location.href='mesa.html'">Consultar</button>
+</div>
+
+<div class="chat-container">
+    <div class="header-container">
+    <span class="text">💎 Faça sua pergunta e Julius responderá 🔮 Considerando sua escolha, a essência de sua pergunta e as tendências do Tarot 💃 Em um instante, você terá uma resposta que o guiará.👳‍♂️ </span>
+    </div>
+    <div id="chat-history"></div>
+    <div class="form-group">
+        <input type="text" id="user-input" placeholder="Digite sua mensagem">
+        <button onclick="sendMessage()">Enviar</button>
+    </div>
 </div>
 
 <!-- Incluindo GSAP via CDN -->
@@ -125,9 +235,12 @@
     initializeCards();
 
     function shuffleCards() {
+        const shuffleSound = document.getElementById('shuffleSound');
+        shuffleSound.play(); // Tocar o som de embaralhar
+
         const piles = [document.getElementById('pile1'), document.getElementById('pile2'), document.getElementById('pile3')];
 
-        // Remove a capa antes de embaralhar
+        // Armazena a capa e remove todas as cartas
         piles.forEach(pile => {
             const cover = pile.querySelector('.cover');
             gsap.to(cover, {
@@ -139,48 +252,111 @@
             });
         });
 
-        const cardsInPile1 = Array.from(piles[0].children).slice(1); // Ignorar a capa
-        const cardsInPile3 = Array.from(piles[2].children).slice(1); // Ignorar a capa
-
-        // Movendo cartas de pile1 para pile3
-        cardsInPile1.forEach((card, index) => {
-            setTimeout(() => {
-                gsap.to(card, {
-                    duration: 0.5,
-                    x: piles[2].getBoundingClientRect().left - piles[0].getBoundingClientRect().left,
-                    y: index * 20,
-                    onComplete: () => {
-                        piles[2].appendChild(card);
-                        card.style.transform = 'none';
-                    }
-                });
-            }, index * 100);
+        // Armazena todas as cartas em uma única lista
+        const allCards = [];
+        piles.forEach(pile => {
+            const cards = Array.from(pile.children).slice(1); // Ignorar a capa
+            allCards.push(...cards);
         });
 
-        // Movendo cartas de pile3 para pile2
-        cardsInPile3.forEach((card, index) => {
-            setTimeout(() => {
-                gsap.to(card, {
-                    duration: 0.5,
-                    x: piles[1].getBoundingClientRect().left - piles[2].getBoundingClientRect().left,
-                    y: index * 20,
-                    onComplete: () => {
-                        piles[1].appendChild(card);
-                        card.style.transform = 'none';
-                    }
-                });
-            }, index * 100);
+        // Shuffle all cards
+        shuffle(allCards);
+
+        // Movendo todas as cartas para suas novas posições
+        allCards.forEach((card, index) => {
+            const newPileIndex = index % piles.length;
+            const targetPile = piles[newPileIndex];
+            const targetX = targetPile.getBoundingClientRect().left - card.parentElement.getBoundingClientRect().left;
+            gsap.to(card, {
+                duration: 1, // Aumentar a duração para 1 segundo
+                x: targetX,
+                y: 0, // Manter a coordenada Y fixa
+                onComplete: () => {
+                    targetPile.appendChild(card);
+                    card.style.transform = 'none';
+                }
+            });
         });
 
-        // Reinitialize cards after animation
-        setTimeout(initializeCards, Math.max(cardsInPile1.length, cardsInPile3.length) * 100 + 500);
+        // Mostrar a capa novamente após as cartas serem movidas
+        setTimeout(() => {
+            piles.forEach(pile => {
+                const cover = pile.querySelector('.cover');
+                cover.style.display = 'block';
+                gsap.to(cover, {
+                    duration: 0.5,
+                    opacity: 1
+                });
+            });
+        }, 1000); // Ajustar o tempo para coincidir com a animação das cartas
     }
 
-    document.getElementById('sortearBtn').addEventListener('click', function() {
-        window.location.href = 'mesa.html';
-    });
-</script>
-<script src="js/app.js"></script>
+    function toggleAudio() {
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        if (backgroundMusic.paused) {
+            backgroundMusic.play();
+        } else {
+            backgroundMusic.pause();
+        }
+    }
 
+    function openConsultPage() {
+        const consultUrl = 'mesa.html'; // URL para a página de consulta
+        window.open(consultUrl, '_blank');
+    }
+
+
+
+// Função para enviar mensagem e obter resposta da API da OpenAI
+async function sendMessage() {
+    const userInput = document.getElementById('user-input').value;
+    if (!userInput) return;
+
+    addMessageToHistory('Você', userInput);
+    document.getElementById('user-input').value = '';
+
+    try {
+        const response = await fetch('/api/openai', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ userInput })
+        });
+
+        if (!response.ok) {
+            throw new Error('Resposta da API não foi bem-sucedida');
+        }
+
+        const data = await response.json(); // Assume que a resposta é um JSON
+        const botMessage = data.message || 'Desculpe, não consegui entender a resposta.';
+
+        addMessageToHistory('Julius', botMessage);
+    } catch (error) {
+        console.error('Erro ao obter resposta da API:', error);
+        addMessageToHistory('Julius', 'Desculpe, ocorreu um erro ao tentar obter a resposta. Tente novamente mais tarde.');
+    }
+}
+
+
+
+    function addMessageToHistory(sender, message) {
+        const chatHistory = document.getElementById('chat-history');
+        const messageElement = document.createElement('div');
+        messageElement.className = `message ${sender === 'Você' ? 'user-message' : 'bot-message'}`;
+        messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
+        chatHistory.appendChild(messageElement);
+        chatHistory.scrollTop = chatHistory.scrollHeight;
+    }
+
+
+
+</script>
+
+<div class="footer-links">
+    <a href="https://github.com/AstridNielsen-lab/julius.github.io?tab=readme-ov-file#significados-das-cartas-do-tar%C3%B4-cigano" target="_blank">Significados</a>
+    <a href="https://api.whatsapp.com/send?phone=5519982785501&text=Pedro%20,%20tudo%20bem%20?%20Preciso%20Tirar%20minhas%20cartas%20estou%20no%20site%20:%20https://julius-github-io.vercel.app/index.html%20,%20qual%20o%20valor%20da%20consulta%20?%20" target="_blank">Pedidos</a>
+    <a href="https://api.whatsapp.com/send?phone=5511992946628&text=Oi%20Julio%20Tudo%20bem%20?%20preciso%20de%20Informa%C3%A7%C3%B5es%20sobre%20Tar%C3%B5%20estou%20no%20site%20:%20https://julius-github-io.vercel.app/index.html%20,%20pode%20me%20ajudar%20?" target="_blank">Contato</a>
+</div>
 </body>
 </html>
