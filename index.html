@@ -301,44 +301,46 @@
     }
 
     function openConsultPage() {
-        const consultUrl = 'mesa.html'; // URL para a página de consulta
+        const consultUrl = 'consultar.html'; // URL para a página de consulta
         window.open(consultUrl, '_blank');
     }
 
 
 
-// Função para enviar mensagem e obter resposta da API da OpenAI
-async function sendMessage() {
-    const userInput = document.getElementById('user-input').value;
-    if (!userInput) return;
+    // Função para enviar mensagem e obter resposta da API da OpenAI
+    async function sendMessage() {
+        const userInput = document.getElementById('user-input').value;
+        if (!userInput) return;
 
-    addMessageToHistory('Você', userInput);
-    document.getElementById('user-input').value = '';
+        // Adicionar a mensagem do usuário no histórico do chat
+        addMessageToHistory('Você', userInput);
 
-    try {
-        const response = await fetch('/api/openai', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ userInput })
-        });
+        // Limpar o campo de entrada de texto
+        document.getElementById('user-input').value = '';
 
-        if (!response.ok) {
-            throw new Error('Resposta da API não foi bem-sucedida');
+        try {
+            const response = await fetch('https://api.openai.com/v1/engines/davinci-codex/completions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer CHAVE OPEN AI' // Substitua pela sua chave da API
+                },
+                body: JSON.stringify({
+                    prompt: userInput,
+                    max_tokens: 150
+                })
+            });
+
+            const data = await response.json();
+            const botMessage = data.choices[0].text.trim();
+
+            // Adicionar a mensagem do bot no histórico do chat
+            addMessageToHistory('Julius', botMessage);
+        } catch (error) {
+            console.error('Erro ao obter resposta da API:', error);
+            addMessageToHistory('Julius', 'Desculpe, antes de perguntar! Por favor, ative seu plano para poder utilizar este recurso.');
         }
-
-        const data = await response.json(); // Assume que a resposta é um JSON
-        const botMessage = data.message || 'Desculpe, não consegui entender a resposta.';
-
-        addMessageToHistory('Julius', botMessage);
-    } catch (error) {
-        console.error('Erro ao obter resposta da API:', error);
-        addMessageToHistory('Julius', 'Desculpe, ocorreu um erro ao tentar obter a resposta. Tente novamente mais tarde.');
     }
-}
-
-
 
     function addMessageToHistory(sender, message) {
         const chatHistory = document.getElementById('chat-history');
