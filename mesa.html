@@ -158,11 +158,10 @@
         </div>
 
         <div class="button-container">
-              <audio id="backgroundMusic" src="fundo.mp3" loop></audio>
             <button class="button" onclick="window.location.href='index.html'">Embaralhar</button>
             <button class="button" onclick="playAudio()">Dicas de Consulta</button>
             <button class="button" id="sortearBtn" onclick="abrirCartas()">Abrir Cartas</button>
-          <button onclick="toggleAudio()">Play/Pause Música</button>
+            <button class="button" onclick="toggleAudio()">Play/Pause Música</button>
             <a class="button-link" href="https://mpago.la/2wdeTaR" target="_blank">Pagar</a>
         </div>
 
@@ -174,37 +173,49 @@
             </h3>
         </div>
 
-        <div class="button-container">
-            <button class="button" onclick="window.location.href='https://mpago.la/2wdeTaR'">Clique aqui para realizar o pagamento</button>
+        <div class="payment-container">
+            <h2>Valor das Cartas:</h2>
+            <p>Consulte o valor de cada carta ou faça um pagamento único para a leitura completa.</p>
         </div>
 
-
         <div class="footer-links">
-            <h3>Desenvolvido por Julio Campos Machado</h3>
-            
+            <h3>Sobre o Tarô Cigano</h3>
+            <p>O Tarô Cigano é uma prática esotérica que utiliza cartas para oferecer orientações e previsões baseadas na interpretação simbólica. Cada carta possui um significado específico e pode fornecer insights valiosos sobre diversas áreas da vida.</p>
+            <h4>Links Úteis:</h4>
+            <a href="#">Início</a> | <a href="#">Sobre</a> | <a href="#">Contato</a> | <a href="#">Política de Privacidade</a>
         </div>
     </div>
 
-<audio id="audioPlayer" src="consulta.mp3" preload="auto"></audio>
-
     <script>
+        let audioPlaying = false;
+        const audio = document.getElementById('backgroundMusic');
+
+        function toggleAudio() {
+            if (audioPlaying) {
+                audio.pause();
+            } else {
+                audio.play();
+            }
+            audioPlaying = !audioPlaying;
+        }
+
         function playAudio() {
-            var audio = document.getElementById('audioPlayer');
+            const audio = new Audio('dicas.mp3');
             audio.play();
         }
 
- </script>
-<audio id="audioPlayer" src="fundo.mp3" preload="auto"></audio>
-     <script>
-        // Função para tocar o áudio fundo
-        function playAudio() {
-            var audio = new Audio('fundo.mp3');
-            audio.play();
+        function abrirCartas() {
+            const cartas = [
+                { id: 'imagemCarta1', texto: 'Carta do Passado', significado: 'Significado do Passado' },
+                { id: 'imagemCarta2', texto: 'Carta do Presente', significado: 'Significado do Presente' },
+                { id: 'imagemCarta3', texto: 'Carta do Futuro', significado: 'Significado do Futuro' }
+            ];
+            cartas.forEach(carta => {
+                document.getElementById(carta.id).src = 'img/carta.png'; // Aqui você deve colocar a imagem da carta correspondente
+                document.getElementById(carta.id.replace('imagem', 'carta')).textContent = carta.texto;
+                document.getElementById(carta.id.replace('imagem', 'significado')).textContent = carta.significado;
+            });
         }
-
-
-
-
-    <script src="js/app.js"></script>
+    </script>
 </body>
 </html>
