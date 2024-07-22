@@ -162,7 +162,7 @@
             <button class="button" onclick="window.location.href='index.html'">Embaralhar</button>
             <button class="button" onclick="playAudio()">Dicas de Consulta</button>
             <button class="button" id="sortearBtn" onclick="abrirCartas()">Abrir Cartas</button>
-            <button class="button" onclick="toggleAudio()">Play/Pause Música</button> <!-- Corrigido -->
+          <button onclick="toggleAudio()">Play/Pause Música</button>
             <a class="button-link" href="https://mpago.la/2wdeTaR" target="_blank">Pagar</a>
         </div>
 
@@ -194,6 +194,13 @@
         }
 
  </script>
+<audio id="audioPlayer" src="fundo.mp3" preload="auto"></audio>
+     <script>
+        // Função para tocar o áudio fundo
+        function playAudio() {
+            var audio = new Audio('fundo.mp3');
+            audio.play();
+        }
 
 
 
