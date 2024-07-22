@@ -132,7 +132,6 @@
     </style>
 </head>
 <body>
-    <audio id="backgroundMusic" src="fundo.mp3" loop></audio>
     <div class="container">
         <div class="cards shuffle">
             <div class="card">
@@ -158,11 +157,10 @@
         </div>
 
         <div class="button-container">
-            <button class="button" onclick="window.location.href='index.html'">Embaralhar</button>
+            <button class="button"onclick="window.location.href='index.html'">Embaralhar</button>
             <button class="button" onclick="playAudio()">Dicas de Consulta</button>
             <button class="button" id="sortearBtn" onclick="abrirCartas()">Abrir Cartas</button>
-            <button class="button" onclick="toggleAudio()">Play/Pause Música</button>
-            <a class="button-link" href="https://mpago.la/2wdeTaR" target="_blank">Pagar</a>
+            <a class="button-link" href="https://mpago.la/2wdeTaR" target="_blank">Pagar</a> <!-- Novo botão -->
         </div>
 
         <div class="card-description-container">
@@ -173,54 +171,35 @@
             </h3>
         </div>
 
-        <div class="payment-container">
-            <h2>Valor das Cartas:</h2>
-            <p>Consulte o valor de cada carta ou faça um pagamento único para a leitura completa.</p>
-        </div>
-
-        <div class="footer-links">
-            <h3>Sobre o Tarô Cigano</h3>
-            <p>O Tarô Cigano é uma prática esotérica que utiliza cartas para oferecer orientações e previsões baseadas na interpretação simbólica. Cada carta possui um significado específico e pode fornecer insights valiosos sobre diversas áreas da vida.</p>
-         
-        </div>
-    </div>
-
-  <div class="button-container">
+           <div class="button-container">
             <a class="button-link" href="https://github.com/AstridNielsen-lab">GitHub</a>
             <a class="button-link" href="https://api.whatsapp.com/send?phone=5511992946628&text=Oi%20Julio%20Tudo%20bem%20?%20preciso%20de%20Informa%C3%A7%C3%B5es%20sobre%20Tar%C3%B5%20estou%20no%20site%20:%20https://julius-github-io.vercel.app/index.html%20,%20pode%20me%20ajudar%20?">Contato</a>
             <a class="button-link" href="https://api.whatsapp.com/send?phone=5519982785501&text=Pedro%20,%20tudo%20bem%20?%20Preciso%20Tirar%20minhas%20cartas%20estou%20no%20site%20:%20https://julius-github-io.vercel.app/index.html%20,%20qual%20o%20valor%20da%20consulta%20?%20" target="_blank">Consulta</a>
-        </div>     
+        </div>
+        
+        <div class="payment-container">
+            <h3>Você pode pagar sua consulta clicando <a href="https://mpago.la/2wdeTaR" target="_blank">aqui</a>.</h3>
+        </div>
+
+        <div class="footer-links">
+            <h3>Desenvolvido por Julio Campos Machado</h3>
+            
+        </div>
+    </div>
+
+<audio id="audioPlayer" src="consulta.mp3" preload="auto"></audio>
 
     <script>
-        let audioPlaying = false;
-        const audio = document.getElementById('backgroundMusic');
-
-        function toggleAudio() {
-            if (audioPlaying) {
-                audio.pause();
-            } else {
-                audio.play();
-            }
-            audioPlaying = !audioPlaying;
-        }
-
         function playAudio() {
-            const audio = new Audio('dicas.mp3');
+            var audio = document.getElementById('audioPlayer');
             audio.play();
         }
 
-        function abrirCartas() {
-            const cartas = [
-                { id: 'imagemCarta1', texto: 'Carta do Passado', significado: 'Significado do Passado' },
-                { id: 'imagemCarta2', texto: 'Carta do Presente', significado: 'Significado do Presente' },
-                { id: 'imagemCarta3', texto: 'Carta do Futuro', significado: 'Significado do Futuro' }
-            ];
-            cartas.forEach(carta => {
-                document.getElementById(carta.id).src = 'img/carta.png'; // Aqui você deve colocar a imagem da carta correspondente
-                document.getElementById(carta.id.replace('imagem', 'carta')).textContent = carta.texto;
-                document.getElementById(carta.id.replace('imagem', 'significado')).textContent = carta.significado;
-            });
-        }
-    </script>
+ </script>
+
+
+
+
+    <script src="js/app.js"></script>
 </body>
 </html>
