@@ -179,7 +179,7 @@
 
 <div class="chat-container">
     <div class="header-container">
-    <span class="text">💎 Faça sua pergunta e Julius responderá 🔮 Considerando sua escolha, a essência de sua pergunta e as tendências do Tarot 💃 Em um instante, você terá uma resposta que o guiará.👳‍♂️ </span>
+    <span class="text">💎 Faça sua pergunta e Julius responderá 🔮 💃 Em um instante, você terá uma resposta que o guiará.👳‍♂️ </span>
     </div>
     <div id="chat-history"></div>
     <div class="form-group">
@@ -475,19 +475,52 @@
     ];
 
     function displayMessage(message, isUser) {
-        const messageElement = document.createElement('div');
-        messageElement.className = isUser ? 'message user-message' : 'message bot-message';
-        messageElement.textContent = message;
-        chatHistory.appendChild(messageElement);
-        chatHistory.scrollTop = chatHistory.scrollHeight;
+    const messageElement = document.createElement('div');
+    messageElement.className = isUser ? 'message user-message' : 'message bot-message';
+    messageElement.textContent = message;
+    chatHistory.appendChild(messageElement);
+    chatHistory.scrollTop = chatHistory.scrollHeight;
+    
+    // Adiciona a leitura em voz alta
+    if (!isUser && 'speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(message);
+        utterance.lang = 'pt-BR'; // Defina o idioma apropriado
         
-        // Adiciona a leitura em voz alta
-        if (!isUser && 'speechSynthesis' in window) {
-            const utterance = new SpeechSynthesisUtterance(message);
-            utterance.lang = 'pt-BR'; // Defina o idioma apropriado
-            window.speechSynthesis.speak(utterance);
+        // Verifique se há vozes disponíveis e selecione uma feminina
+        const voices = window.speechSynthesis.getVoices();
+        const femaleVoice = voices.find(voice => voice.name.toLowerCase().includes('female') || voice.name.toLowerCase().includes('brasil'));
+
+        if (femaleVoice) {
+            utterance.voice = femaleVoice;
         }
+
+        // Ajuste outras propriedades conforme necessário
+        utterance.pitch = 1.2; // Ajuste a tonalidade para um tom mais suave
+        utterance.rate = 1;  // Ajuste a velocidade da fala
+
+        window.speechSynthesis.speak(utterance);
     }
+}
+
+function loadVoices() {
+    return new Promise((resolve) => {
+        const synth = window.speechSynthesis;
+        if (synth.onvoiceschanged !== undefined) {
+            synth.onvoiceschanged = () => {
+                resolve(synth.getVoices());
+            };
+        } else {
+            resolve(synth.getVoices());
+        }
+    });
+}
+
+let voices = [];
+
+loadVoices().then(loadedVoices => {
+    voices = loadedVoices;
+});
+
 
     function getRandomResponse() {
         const randomIndex = Math.floor(Math.random() * predefinedResponses.length);
