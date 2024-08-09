@@ -40,11 +40,7 @@ cd esmeralda
 
 Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou pull requests.
 
-## Licença
-
-Este projeto está sob a licença [nome da licença]. Consulte o arquivo LICENSE para mais detalhes.
-
-Claro, posso ajudar com isso. Vamos criar 100 respostas variadas para diferentes perguntas, inspiradas nos exemplos que você forneceu. Cada resposta terá um formato semelhante, mas com variações em termos de significado e contexto. Aqui estão algumas respostas exemplo:
+## Significados
 
 1. **Nome:** "AMIGO"  
    **Número:** 1  
