@@ -1,6 +1,6 @@
-# Esmeralda
+# Julius
 
-**Esmeralda** é um aplicativo de Tarô Cigano que oferece uma experiência interativa e intuitiva com 36 cartas. Descubra o significado e as interpretações das cartas para guiar suas decisões e reflexões.
+**Julius** é um aplicativo de Tarô Cigano que oferece uma experiência interativa e intuitiva com 36 cartas. Descubra o significado e as interpretações das cartas para guiar suas decisões e reflexões.
 
 ## Tiragem com Três Cartas
 
@@ -21,24 +21,6 @@ Para realizar uma tiragem com três cartas, siga os passos abaixo:
 - JavaScript
 - [Outras tecnologias que você usou, se aplicável]
 
-## Instalação
-
-Instruções para instalar e rodar o projeto:
-
-```bash
-git clone https://github.com/AstridNielsen-lab/esmeralda.github.io.git
-cd esmeralda
-```
-
-## Como Usar
-
-1. Abra o arquivo `index.html` em seu navegador.
-2. Explore as cartas e suas interpretações.
-3. Utilize o aplicativo para realizar leituras de Tarô.
-
-## Contribuição
-
-Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou pull requests.
 
 ## Significados
 
